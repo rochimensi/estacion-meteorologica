@@ -1,0 +1,16 @@
+.idea
+.DS_Store
+
+node_modules
+dist
+releases
+.tmp
+.sass-cache
+
+npm-debug.log
+*.zip
+debug.log
+
+
+app/node_modules
+app/.env
