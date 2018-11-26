@@ -44,36 +44,56 @@ module.exports = class Serial {
 
         logger.info("[Data] ", receivedData);
 
-        receivedData = receivedData.split('/');
+        receivedData = receivedData.split("/");
 
         receivedData.forEach(r => {
 
-          if (r.indexOf('V') >= 0) {
-            sendData = r.substring(r.indexOf('V') + 1, r.length);
-            socket.emit('updateViento', sendData);
+          if (r.indexOf("V") == 0) {
+            sendData = r.substring(r.indexOf("V") + 1, r.length);
+            socket.emit("updateViento", sendData);
           }
-          if (r.indexOf('H') >= 0) {
-            sendData = r.substring(r.indexOf('H') + 1, r.length);
-            socket.emit('updateHumedad', sendData);
+          if (r.indexOf("H") == 0) {
+            sendData = r.substring(r.indexOf("H") + 1, r.length);
+            socket.emit("updateHumedad", sendData);
           }
-          if (r.indexOf('T') >= 0) {
-            sendData = r.substring(r.indexOf('T') + 1, r.length);
-            socket.emit('updateTemperatura', sendData);
+          if (r.indexOf("T") == 0) {
+            sendData = r.substring(r.indexOf("T") + 1, r.length);
+            socket.emit("updateTemperatura", sendData);
           }
 
+          if(r.indexOf("IDEN") > -1) {
+            sendData = r.substring(r.indexOf("IDEN") + 4, r.length);
+            socket.emit("updateStatus", sendData);
+          }
+
+          if(r.indexOf("SCAN") > -1) {
+            sendData = r.substring(r.indexOf("SCAN") + 4, r.length);
+            socket.emit("updateScan", sendData);
+          }
         })
       });
     });
 
   }
 
+  iden() {
+    logger.info("[Command] Running IDEN");
+    this.serialPort.write("IDEN\n");
+  }
+
   scan(inicio, fin) {
-    console.log(`SCAN(${inicio},${fin})\n`);
-    //this.serialPort.write(`SCAN(${inicio},${fin})\n`);
+    logger.info("[Command] Running SCAN");
+    this.serialPort.write(`SCAN(${inicio},${fin})\n`);
+  }
+
+  wrdo(ledPin, state) {
+    logger.info("[Command] Running WRDO");
+    this.serialPort.write(`WRDO(${ledPin},${state})\n`);
   }
 
   write(data) {
-    this.serialPort.write(data);
+    logger.info("[Command] Running write");
+    this.serialPort.write(data + "\n");
   }
 };
 

@@ -32,7 +32,15 @@ const config = {
 	},
 
 	settings: {
-		delay: 1000
+		barrido: {
+			inicio: "2",
+			fin: "4"
+		},
+		delay: 1000,
+		leds: {
+			rojo: "9",
+			verde: "6"
+		}
 	}
 };
 
