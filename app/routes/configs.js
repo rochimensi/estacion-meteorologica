@@ -8,7 +8,6 @@ let configsRouter = express.Router();
 
 module.exports = app => {
 
-  configsRouter.put("/baudios", jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), ConfigsCtrl.changeChannel);
   configsRouter.put("/canal",   jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), ConfigsCtrl.changeChannel);
   configsRouter.get("/delay",   jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), (req, res) => {
     ConfigsCtrl.changeDelay(req, res, app);

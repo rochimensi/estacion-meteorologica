@@ -2,10 +2,6 @@ let config = require('../config');
 
 class ConfigsController {
 
-  async changeBaudios(req, res) {
-
-  }
-
   async changeChannel(req, res) {
 
   }

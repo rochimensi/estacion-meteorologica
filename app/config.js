@@ -18,7 +18,7 @@ const config = {
 
 	users: {
 		admin: "arqav2018@gmail.com",
-		user: "rosario.mensi@gmail.com",
+		user: "arqav2018+user@gmail.com",
 		adminPassword: "1234",
 		userPassword: "5678"
 	},

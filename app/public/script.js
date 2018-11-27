@@ -22,4 +22,10 @@ function initSocketIO() {
   socket.on('updateScan', function (data) {
     console.log("Scan: ", data);
   });
+  socket.on('updateGabinete', function (data) {
+    console.log("Abierto: ", data);
+  });
+  socket.on('updateSuministro', function (data) {
+    console.log("Corte electrico: ", data);
+  });
 }

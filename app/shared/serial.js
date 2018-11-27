@@ -70,6 +70,18 @@ module.exports = class Serial {
             sendData = r.substring(r.indexOf("SCAN") + 4, r.length);
             socket.emit("updateScan", sendData);
           }
+
+          if(r.indexOf("GABI") > -1) {
+            sendData = r.substring(r.indexOf("GABI") + 4, r.length);
+            socket.emit("updateGabinete", !parseInt(sendData));
+            // TODO enviar mail si sendData === "0"
+          }
+
+          if(r.indexOf("SUMIN") > -1) {
+            sendData = r.substring(r.indexOf("SUMIN") + 5, r.length);
+            socket.emit("updateSuministro", !parseInt(sendData));
+            // TODO enviar mail si sendData === "0"
+          }
         })
       });
     });
