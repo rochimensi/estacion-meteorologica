@@ -2,8 +2,47 @@ let config = require('../config');
 
 class ConfigsController {
 
-  async changeChannel(req, res) {
+  setAlerts(req, res) {
+    let state = req.query.valor;
+    if(state === "true") state = true;
+    if(state === "false") state = false;
+    config.alerts.toggleEmails = state;
+    res.sendStatus(200);
+  }
 
+  setEmail(req, res) {
+    config.alerts.email = req.query.email;
+    res.sendStatus(200);
+  }
+
+  setTempUmbrales(req, res) {
+    config.settings.umbrales.tempInf = req.query.inferior;
+    config.settings.umbrales.tempSup = req.query.superior;
+    res.sendStatus(200);
+  }
+
+  setTempUmbrales(req, res) {
+    config.settings.umbrales.tempInf = req.query.inferior;
+    config.settings.umbrales.tempSup = req.query.superior;
+    res.sendStatus(200);
+  }
+
+  setVientoUmbrales(req, res) {
+    config.settings.umbrales.vientoInf = req.query.inferior;
+    config.settings.umbrales.vientoSup = req.query.superior;
+    res.sendStatus(200);
+  }
+
+  setHumedadUmbrales(req, res) {
+    config.settings.umbrales.humInf = req.query.inferior;
+    config.settings.umbrales.humSup = req.query.superior;
+    res.sendStatus(200);
+  }
+
+  setLedSchedule(req, res, app) {
+
+    //scheduleLedsOn(app.serial, )
+    res.sendStatus(200);
   }
 
   changeDelay(req, res, app) {

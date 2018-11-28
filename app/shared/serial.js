@@ -51,14 +51,32 @@ module.exports = class Serial {
           if (r.indexOf("V") == 0) {
             sendData = r.substring(r.indexOf("V") + 1, r.length);
             socket.emit("updateViento", sendData);
+            if(sendData > config.settings.umbrales.vientoSup) {
+              Email.sendUmbralAlert("Viento", false, true, sendData, "m/s");
+            }
+            if(sendData < config.settings.umbrales.vientoInf) {
+              Email.sendUmbralAlert("Viento", true, false, sendData, "m/s");
+            }
           }
           if (r.indexOf("H") == 0) {
             sendData = r.substring(r.indexOf("H") + 1, r.length);
             socket.emit("updateHumedad", sendData);
+            if(sendData > config.settings.umbrales.humSup) {
+              Email.sendUmbralAlert("Humedad", false, true, sendData, "%RH");
+            }
+            if(sendData < config.settings.umbrales.humInf) {
+              Email.sendUmbralAlert("Humedad", true, false, sendData, "%RH");
+            }
           }
           if (r.indexOf("T") == 0) {
             sendData = r.substring(r.indexOf("T") + 1, r.length);
             socket.emit("updateTemperatura", sendData);
+            if(sendData > config.settings.umbrales.tempSup) {
+              Email.sendUmbralAlert("Temperatura", false, true, sendData, "C");
+            }
+            if(sendData < config.settings.umbrales.tempInf) {
+              Email.sendUmbralAlert("Temperatura", true, false, sendData, "C");
+            }
           }
 
           if(r.indexOf("IDEN") > -1) {
@@ -73,14 +91,20 @@ module.exports = class Serial {
 
           if(r.indexOf("GABI") > -1) {
             sendData = r.substring(r.indexOf("GABI") + 4, r.length);
-            socket.emit("updateGabinete", !parseInt(sendData));
-            // TODO enviar mail si sendData === "0"
+            const abierto = !parseInt(sendData);
+            socket.emit("updateGabinete", abierto);
+            if(abierto) {
+              Email.sendGabineteAbiertoAlert();
+            }
           }
 
           if(r.indexOf("SUMIN") > -1) {
             sendData = r.substring(r.indexOf("SUMIN") + 5, r.length);
-            socket.emit("updateSuministro", !parseInt(sendData));
-            // TODO enviar mail si sendData === "0"
+            const corte = !parseInt(sendData);
+            socket.emit("updateSuministro", corte);
+            if(corte) {
+              Email.sendCorteElectricoAlert();
+            }
           }
         })
       });
