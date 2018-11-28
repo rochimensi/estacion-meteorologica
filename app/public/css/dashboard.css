@@ -11,15 +11,35 @@ body {
  * Typography
  */
 
+table { table-layout: fixed; }
+
+
 h1 {
   margin-bottom: 20px;
   padding-bottom: 9px;
   border-bottom: 1px solid #eee;
 }
 
-/*
- * Sidebar
- */
+h3{
+  display: inline-block;
+}
+
+
+.grey{
+   background: #eceeef;
+}
+
+ .circle:before {
+  content: ' \25CF';
+  font-size: 200px;
+  color: #FF4040;
+}
+
+ .circle-active:before {
+  content: ' \25CF';
+  font-size: 200px;
+  color: #00dc83;
+}
 
 .sidebar {
   position: fixed;
