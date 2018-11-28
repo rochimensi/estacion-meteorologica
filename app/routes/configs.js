@@ -8,7 +8,14 @@ let configsRouter = express.Router();
 
 module.exports = app => {
 
-  configsRouter.put("/canal",   jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), ConfigsCtrl.changeChannel);
+  configsRouter.get("/alerts",  jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), ConfigsCtrl.setAlerts);
+
+  configsRouter.get("/alerts-email",  jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), ConfigsCtrl.setEmail);
+
+  configsRouter.get("/umbrales-temperatura",  jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), ConfigsCtrl.setTempUmbrales);
+  configsRouter.get("/umbrales-viento",  jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), ConfigsCtrl.setVientoUmbrales);
+  configsRouter.get("/umbrales-humedad",  jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), ConfigsCtrl.setHumedadUmbrales);
+
   configsRouter.get("/delay",   jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), (req, res) => {
     ConfigsCtrl.changeDelay(req, res, app);
   });

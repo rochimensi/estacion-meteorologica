@@ -1,4 +1,4 @@
-/////////////////////////////
+d/////////////////////////////
 // Declaracion de Variables
 /////////////////////////////
 
@@ -43,6 +43,7 @@ float temperaturaC = 0;
 const int gabinete = 2;
 int gabineteState = 1;
 int gabineteStatePrev = 1;
+
 const int suministroElectrico = 3;
 int suministroState = 1;
 int suministroStatePrev = 1;

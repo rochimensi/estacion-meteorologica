@@ -1,6 +1,11 @@
 require('dotenv').config({ path: './.env' });
 
 const config = {
+  alerts: {
+    email: "rmensi@makingsense.com",
+    triggerEmails: true
+  },
+
 	email: {
 		email: process.env.EMAIL,
 		password: process.env.EMAIL_PSSWD
@@ -20,8 +25,8 @@ const config = {
 		admin: "arqav2018@gmail.com",
 		user: "arqav2018+user@gmail.com",
 		adminPassword: "1234",
-		userPassword: "5678"
-	},
+		userPassword: "5678",
+  },
 
 	serial: {
 		portName: "COM3"
@@ -40,7 +45,15 @@ const config = {
 		leds: {
 			rojo: "9",
 			verde: "6"
-		}
+		},
+    umbrales: {
+		  tempInf: 10,
+      tempSup: 30,
+      vientoInf: 100,
+      vientoSup: 200,
+      humInf: 200,
+      humSup: 1200
+    }
 	}
 };
 
