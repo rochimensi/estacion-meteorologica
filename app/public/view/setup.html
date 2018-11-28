@@ -45,8 +45,66 @@
         <main id="main" class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
           <h1>Setup</h1>
           <h3>Setup Sensores Analogicos</h3>
-          <section class="row text-center placeholders grey">
-            
+          <section class="row text-center grey">
+            <div style="border: 1px solid #a0a0a0;width: 33% !important;" >
+              <b>Viento</b><br><br>
+              <div>
+                <b>ON</b> <input type="checkbox" id="viento-on" value=""/>
+                 <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div>
+              <div>
+                <b>A</b><input type="text" id="viento-a" value="0" style="width: 40px;border:none" />
+                <b>B</b><input type="text" id="viento-b" value="0" style="width: 40px;border:none" />
+                <b>C</b><input type="text" id="viento-c" value="0" style="width: 40px;border:none" />
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div>
+              <div>
+                <b>U Sup.</b><input type="text" id="viento-umb-inf" value="0" style="width: 40px;border:none" />
+                <b>U Inf.</b><input type="text" id="viento-umb-sup" value="0" style="width: 40px;border:none" />
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div>
+
+            </div>
+            <div style="border: 1px solid #a0a0a0;width: 33% !important;">
+              <b>Humedad</b><br><br>
+              <div>
+                <b>ON</b> <input type="checkbox" id="hum-on" value=""/> 
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div>
+              <div>
+                <b>A</b><input type="text" id="hum-a" value="0" style="width: 40px;border:none" />
+                <b>B</b><input type="text" id="hum-b" value="0" style="width: 40px;border:none" />
+                <b>C</b><input type="text" id="hum-c" value="0" style="width: 40px;border:none" />
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div>  
+
+              <div>
+                <b>U Sup.</b><input type="text" id="hum-umb-inf" value="0" style="width: 40px;border:none" />
+                <b>U Inf.</b><input type="text" id="hum-umb-sup" value="0" style="width: 40px;border:none" />
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div>  
+
+            </div>
+            <div style="border: 1px solid #a0a0a0;width: 34% !important;">
+              <b>Temperatura</b><br><br>
+              <div>
+                <b>ON</b> <input type="checkbox" id="temp-on" value=""/> 
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div> 
+              <div>
+                 <b>A</b><input type="text" id="temp-a" value="0" style="width: 40px;border:none" />
+                 <b>C</b><input type="text" id="temp-b" value="0" style="width: 40px;border:none" />
+                 <b>C</b><input type="text" id="temp-c" value="0" style="width: 40px;border:none" />
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div>  
+
+              <div>
+                <b>U Sup.</b><input type="text" id="temp-umb-inf" value="0" style="width: 40px;border:none" />
+                <b>U Inf.</b><input type="text" id="temp-umb-sup" value="0" style="width: 40px;border:none" />
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div>  
+
+            </div>
           </section>
           <br>
           <h3>Barrido de Canales</h3> <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">SCAN</button>
