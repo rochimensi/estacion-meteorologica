@@ -11,11 +11,19 @@ class EventController {
   }
 
   async search(req, res) {
-    const query = req.query || {};
-    const skip = parseInt(query.page, 10) || 0;
-    const limit = parseInt(query.limit, 10) || 10;
+    let search = {};
+    const skip = parseInt(req.query.page, 10) || 0;
+    const limit = parseInt(req.query.limit, 10) || 10;
 
-    let events = await Event.find(query).limit(limit).skip(skip);
+    if(req.query.from) {
+      search.createdAt = {$gte: new Date(req.query.from)};
+    }
+
+    if(req.query.to) {
+      search.createdAt = {$lte: new Date(req.query.to)};
+    }
+
+    let events = await Event.find(search).skip(skip).limit(limit);
     res.status(200).send(events || []);
   }
 }

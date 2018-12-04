@@ -10,7 +10,7 @@ const EventSchema = new Schema(
       required: true
     },
     valor: {
-      type: Number,
+      type: String,
       required: true
     }
   }

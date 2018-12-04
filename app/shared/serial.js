@@ -1,6 +1,7 @@
 let config = require("../config");
 let logger = require("../utils/logger");
 let Email = require("../shared/email");
+let EventsController = require("../controllers/event");
 
 const SerialPort = require("serialport");
 
@@ -24,14 +25,6 @@ module.exports = class Serial {
     });
 
     receivedData = "";
-/*
-    setInterval(() => {
-      nroMuestrasFaltantes++;
-      if (nroMuestrasFaltantes === 5) {
-        logger.info("Enviando alerta de muestras faltantes..");
-        //Email.sendMuestrasFaltantesAlert(config.users.admin);
-      }
-    }, delay);*/
 
     this.serialPort.on("open", () => {
       logger.log("Comunicacion Serial abierta..");
@@ -51,6 +44,7 @@ module.exports = class Serial {
           if (r.indexOf("V") == 0) {
             sendData = r.substring(r.indexOf("V") + 1, r.length);
             socket.emit("updateViento", sendData);
+            EventsController.post({sensor: "viento", valor: sendData});
             if(sendData > config.settings.umbrales.vientoSup) {
               Email.sendUmbralAlert("Viento", false, true, sendData, "m/s");
             }
@@ -61,6 +55,7 @@ module.exports = class Serial {
           if (r.indexOf("H") == 0) {
             sendData = r.substring(r.indexOf("H") + 1, r.length);
             socket.emit("updateHumedad", sendData);
+            EventsController.post({sensor: "humedad", valor: sendData});
             if(sendData > config.settings.umbrales.humSup) {
               Email.sendUmbralAlert("Humedad", false, true, sendData, "%RH");
             }
@@ -71,6 +66,7 @@ module.exports = class Serial {
           if (r.indexOf("T") == 0) {
             sendData = r.substring(r.indexOf("T") + 1, r.length);
             socket.emit("updateTemperatura", sendData);
+            EventsController.post({sensor: "temperatura", valor: sendData});
             if(sendData > config.settings.umbrales.tempSup) {
               Email.sendUmbralAlert("Temperatura", false, true, sendData, "C");
             }
