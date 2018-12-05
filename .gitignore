@@ -14,3 +14,4 @@ debug.log
 
 app/node_modules
 app/.env
+app/public/reports
