@@ -29,14 +29,14 @@
         <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Sensores Analógicos <span class="sr-only">(current)</span></a>
+                    <a class="nav-link active" href="#">Dashboard<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <a class="nav-link" href="digitalSensor.html">Sensores Digitales</a>
                 </li>
                 <li class="nav-item" id="setup">
                     <a class="nav-link" href="setup.html" onclick="setSetupPage()">Setup</a>
-                </li>
+                </li>-->
             </ul>
 
         </nav>
@@ -59,6 +59,151 @@
                     </tr>
                 </table>
             </section>
+            </br></br></br></br>
+            <h1>Sensores Digitales</h1>
+              <div style="margin-left: 35%;">
+                <section class="row text-center placeholders">
+                  <div class="col-6 col-sm-3 placeholder">
+                    <span class="circle-active" id="stat-gabi"></span>
+                    <h4>Estado de Gabinete</h4>
+                    <div class="text-muted" id="stat-gabi-text">ABIERTO</div>
+                  </div>
+                  <div class="col-6 col-sm-3 placeholder">
+                    <span class="circle-active" id="stat-sum"></span>
+                    <h4>Suministro Electrico</h4>
+                    <div class="text-muted" id="stat-sum-text">ABIERTO</div>
+                  </div>
+                </section>
+              </div> 
+
+        </br></br></br></br>
+
+        <div id="setup">
+          <h1>Setup</h1>
+          <h3>Setup Sensores Analogicos</h3>
+          <section class="row text-center grey">
+            <div style="border: 1px solid #a0a0a0;width: 33% !important;" >
+              <b>Viento</b><br><br>
+              <div>
+                <b>ON</b> <input type="checkbox" id="viento-on" checked="checked"/>
+                </br>    </br>    </br>
+              </div>
+              <div>
+                <b>A</b><input type="text" id="viento-a" value="0" style="width: 40px;border:none" />
+                <b>B</b><input type="text" id="viento-b" value="0" style="width: 40px;border:none" />
+                <b>C</b><input type="text" id="viento-c" value="0" style="width: 40px;border:none" />
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div>
+              <div>
+                <b>U Sup.</b><input type="text" id="viento-umb-inf" value="0" style="width: 40px;border:none" />
+                <b>U Inf.</b><input type="text" id="viento-umb-sup" value="0" style="width: 40px;border:none" />
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div>
+
+            </div>
+            <div style="border: 1px solid #a0a0a0;width: 33% !important;">
+              <b>Humedad</b><br><br>
+              <div>
+                
+                <b>ON</b> <input type="checkbox" id="hum-on" checked="checked"/> 
+                 </br>    </br>    </br>
+              </div>
+              <div>
+                <b>A</b><input type="text" id="hum-a" value="0" style="width: 40px;border:none" />
+                <b>B</b><input type="text" id="hum-b" value="0" style="width: 40px;border:none" />
+                <b>C</b><input type="text" id="hum-c" value="0" style="width: 40px;border:none" />
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div>  
+
+              <div>
+                <b>U Sup.</b><input type="text" id="hum-umb-inf" value="0" style="width: 40px;border:none" />
+                <b>U Inf.</b><input type="text" id="hum-umb-sup" value="0" style="width: 40px;border:none" />
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div>  
+
+            </div>
+            <div style="border: 1px solid #a0a0a0;width: 34% !important;">
+              <b>Temperatura</b><br><br>
+              <div>
+                <b>ON</b> <input type="checkbox" id="temp-on" checked="checked"/> 
+                 </br>    </br>    </br>
+              </div> 
+              <div>
+                 <b>A</b><input type="text" id="temp-a" value="0" style="width: 40px;border:none" />
+                 <b>C</b><input type="text" id="temp-b" value="0" style="width: 40px;border:none" />
+                 <b>C</b><input type="text" id="temp-c" value="0" style="width: 40px;border:none" />
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div>  
+
+              <div>
+                <b>U Sup.</b><input type="text" id="temp-umb-inf" value="0" style="width: 40px;border:none" />
+                <b>U Inf.</b><input type="text" id="temp-umb-sup" value="0" style="width: 40px;border:none" />
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button><br><br>
+              </div>  
+
+            </div>
+          </section>
+          <br>
+          <h3>Barrido de Canales</h3> <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">SCAN</button>
+          <section class="row text-center grey" style="margin-top: 10px;">
+            <br>
+              <table align="rigth" width="200px">
+                 <tr>
+                   <td style="width: 100px;"><b>Viento</b></td>
+                   <td style="width: 200px;"><b>Humedad</b></td>
+                   <td style="width: 200px;"><b>Temperatura</b></td>
+                 </tr>
+                 <tr>
+                   <td id="scan-viento">-</td>
+                   <td id="scan-hum">-</td>
+                   <td id="scan-temp">-</td>
+                 </tr>  
+              </table>  
+          </section>
+          <br>
+          <h3>Funcionamiento</h3><button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Verificar</button>
+           <section class="row text-center grey" style="margin-top: 10px;">
+              <div style="margin: 20px;" id="func-status">  
+                 
+              </div>  
+          </section>
+          <br>
+          <h3>Tiempo Muestra</h3>
+          <section class="row text-center grey">
+            <div style="margin: 20px;">  
+              <b>Segundos</b> <input type="text" id="muestras-seg" value="0" style="width: 70px;border:none" /> <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button>
+            </div>  
+          </section>
+          <br>
+          <h3>Email Alarmas</h3>
+          <section class="row text-center grey">
+            <div style="margin: 20px;">  
+              <b>Correo Electronico</b> <input type="text" id="email-alarma" value="" style="width: 250px;border:none" /> <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button>
+             </div>    
+          </section>
+          <br>
+          <h3>Estado de Alarma</h3>
+          <section class="row text-center grey">
+             <div style="margin: 20px;">  
+              <b>Encendidas</b> <input type="checkbox" id="estado-alarma" value=""/> 
+             </div>  
+          </section>
+          <br>
+          <h3>Horario de Encendido de Luces</h3>
+          <section class="row text-center grey">
+             <div style="margin: 20px;">  
+                    <input type="datetime-local" id="meeting-time"
+                   name="meeting-time"
+                   style="border:none">
+                   <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button>
+             </div> 
+          </section>
+          <br>
+          <br>
+
+          </div>   
+        </div>    
+
         </main>
 
     </div>

@@ -49,6 +49,10 @@ function setSetupPage(){
   });
 }
 
+
+
+
+
 // canvas request for all browsers
 window.requestAnimFrame = (function(callback) {
   return window.requestAnimationFrame ||
@@ -67,17 +71,6 @@ window.onload = function() {
   google.charts.setOnLoadCallback(drawChart);
 };
 
-function colorAlert(recievedData, tdId, redFrom, yellowFrom) {
-  if (recievedData > redFrom){
-    document.getElementById(tdId).style.backgroundColor = "#DC3912";
-  }
-  else  if (recievedData < redFrom && recievedData > yellowFrom){
-    document.getElementById(tdId).style.backgroundColor = "#FF9900";
-  }
-  else {
-    document.getElementById(tdId).style.backgroundColor = "#38c766";
-  }
-}
 
 function drawChart() {
   dataTemp = google.visualization.arrayToDataTable([
@@ -111,20 +104,77 @@ function initSocketIO() {
   var iosocket = io.connect('http://localhost');
 
   iosocket.on('updateViento', recievedData => {
-    //colorAlert(recievedData, "td3", viento_redFrom, viento_yellowFrom);
     dataViento.setValue(0, 1, parseInt(recievedData));
     chartViento.draw(dataViento, optionsViento);
   });
 
   iosocket.on('updateHumedad', recievedData => {
-    //colorAlert(recievedData, "td2", hum_redFrom, hum_yellowFrom);
     dataHum.setValue(0, 1, parseInt(recievedData));
     chartHum.draw(dataHum, optionsHum);
   });
 
   iosocket.on('updateTemperatura', recievedData => {
-    //colorAlert(recievedData, "td1", temp_redFrom, temp_yellowFrom);
     dataTemp.setValue(0, 1, parseInt(recievedData));
     chartTemp.draw(dataTemp, optionsTemp);
   });
+
+  iosocket.on('updateGabinete', recievedData => {
+    if (recievedData){
+       $("#stat-gabi").attr('class', 'circle');
+       $("#stat-gabi-text").text('CERRADO');
+    }else{
+       $("#stat-gabi").attr('class', 'circle-active');
+       $("#stat-gabi-text").text('ABIERTO');
+    }
+  });
+
+  iosocket.on('updateSuministro', recievedData => {
+     if (recievedData){
+       $("#stat-sum").attr('class', 'circle');
+       $("#stat-sum-text").text('CERRADO');
+    }else{
+       $("#stat-sum").attr('class', 'circle-active');
+       $("#stat-sum-text").text('ABIERTO');
+    }
+  });
+
+
+  iosocket.on('updateStatus', recievedData => {
+     $("#func-status").text(recievedData);
+  });
+  
+  iosocket.on('updateScan', recievedData => {
+    var res = recievedData.split(";");
+    $("#scan-viento").text(res[0]);
+    $("#scan-temp").text(res[2]);
+    $("#scan-hum").text(res[1]);
+  });
 }
+
+
+$(document).ready(function (){
+  $('input[type=checkbox]').click(function(){
+
+       if (this.id == "temp-on"){
+           if (this.checked){
+              $("#td1").css("visibility", "");
+           }else{
+              $("#td1").css("visibility", "hidden");
+           }
+       }else if (this.id ==  "hum-on"){
+          if (this.checked){
+               $("#td2").css("visibility", "");
+           }else{
+              $("#td2").css("visibility", "hidden");
+           }
+       }else if (this.id ==  "viento-on"){
+           if (this.checked){
+              $("#td3").css("visibility", "");
+           }else{
+              $("#td3").css("visibility", "hidden");
+           }
+       }
+     
+  }); 
+});
+
