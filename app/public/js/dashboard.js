@@ -17,24 +17,24 @@ var dataTemp, dataViento, dataHum, chartTemp, chartViento, chartHum;
 
 var optionsHum = {
   width: 200, height: 200,
-  yellowFrom: hum_yellowFrom, yellowTo: hum_yellowTo,
-  redFrom: hum_redFrom, redTo: hum_redTo,
+  //yellowFrom: hum_yellowFrom, yellowTo: hum_yellowTo,
+  //redFrom: hum_redFrom, redTo: hum_redTo,
   minorTicks: 5,
   max: 1511
 };
 
 var optionsTemp = {
   width: 200, height: 200,
-  yellowFrom: temp_yellowFrom, yellowTo: temp_yellowTo,
-  redFrom: temp_redFrom, redTo: temp_redTo,
+  //yellowFrom: temp_yellowFrom, yellowTo: temp_yellowTo,
+  //redFrom: temp_redFrom, redTo: temp_redTo,
   minorTicks: 5,
   max: 46
 };
 
 var optionsViento = {
   width: 200, height: 200,
-  yellowFrom: viento_yellowFrom, yellowTo:viento_yellowTo,
-  redFrom: viento_redFrom, redTo: viento_redTo,
+  //yellowFrom: viento_yellowFrom, yellowTo:viento_yellowTo,
+  //redFrom: viento_redFrom, redTo: viento_redTo,
   minorTicks: 5,
   max: 253
 };
@@ -153,31 +153,56 @@ function initSocketIO() {
 
 
 $(document).ready(function (){
+
+  if (localStorage.getItem("temp-on"))
+  {
+       $("#chartTemp_div").css("visibility", "hidden");
+       $("#temp_not_available").css("visibility", "");
+  }
+  if (localStorage.getItem("hum-on"))
+  {
+       $("#chartHum_div").css("visibility", "hidden");
+       $("#hum_not_available").css("visibility", "");
+  }
+  if (localStorage.getItem("viento-on"))
+  {
+       $("#chartViento_div").css("visibility", "hidden");
+       $("#viento_not_available").css("visibility", "");
+  }
+
+
+
   $('input[type=checkbox]').click(function(){
 
        if (this.id == "temp-on"){
            if (this.checked){
               $("#chartTemp_div").css("visibility", "");
               $("#temp_not_available").css("visibility", "hidden");
+              localStorage.setItem("temp-on", true);
            }else{
               $("#chartTemp_div").css("visibility", "hidden");
               $("#temp_not_available").css("visibility", "");
+              localStorage.setItem("temp-on", false);
            }
        }else if (this.id ==  "hum-on"){
           if (this.checked){
               $("#chartHum_div").css("visibility", "");
               $("#hum_not_available").css("visibility", "hidden");
+              localStorage.setItem("hum-on", true);
            }else{
               $("#chartHum_div").css("visibility", "hidden");
               $("#hum_not_available").css("visibility", "");
+              localStorage.setItem("hum-on", false);
            }
        }else if (this.id ==  "viento-on"){
            if (this.checked){
               $("#chartViento_div").css("visibility", "");
               $("#viento_not_available").css("visibility", "hidden");
+              localStorage.setItem("viento-on", true);
            }else{
               $("#chartViento_div").css("visibility", "hidden");
               $("#viento_not_available").css("visibility", "");
+              localStorage.setItem("viento-on", false);
            }
        }
      
@@ -323,6 +348,61 @@ $("#id-func").click(function(event) {
      } 
     }); 
  });
+
+
+  //UMBRAL HUMEDAD
+  $("#umb-hum-butt").click(function(event) {
+    var uinf = $("#hum-umb-inf").val();
+    var usup = $("#hum-umb-sup").val();
+    event.preventDefault(); 
+    $.ajax({ 
+       type:'GET', 
+       url :"http://localhost:4000/configs/umbrales-humedad?inferior="+ uinf +"&superior="+ usup, 
+       headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+       success: function(status) { 
+       console.log("Status " + status); 
+       } 
+      }); 
+   });
+
+
+ //UMBRAL VIENTO
+ $("#umb-viento-butt").click(function(event) {
+    var uinf = $("#viento-umb-inf").val();
+    var usup = $("#viento-umb-sup").val();
+    event.preventDefault(); 
+    $.ajax({ 
+       type:'GET', 
+       url :"http://localhost:4000/configs/umbrales-viento?inferior="+ uinf +"&superior="+ usup, 
+       headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+       success: function(status) { 
+       console.log("Status " + status); 
+       } 
+      }); 
+ });
+
+
+  //UMBRAL TEMPERATURA
+  $("#umb-temp-butt").click(function(event) {
+    var uinf = $("#temp-umb-inf").val();
+    var usup = $("#temp-umb-sup").val();
+    event.preventDefault(); 
+    $.ajax({ 
+       type:'GET', 
+       url :"http://localhost:4000/configs/umbrales-temperatura?inferior="+ uinf +"&superior="+ usup, 
+       headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+       success: function(status) { 
+       console.log("Status " + status); 
+       } 
+      }); 
+   });
+
+
+
+
+
+
+
 
 });
 
