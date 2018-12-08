@@ -1,14 +1,21 @@
-let CronJob = require('cron').CronJob;
+let cron = require('cron').CronJob;
 let config = require( "../config");
 let logger = require( '../utils/logger');
 
 class ScheduleService {
-  scheduleLedsOn(serial, moment) {
+  createCron(app, time, job) {
     console.log("Registrando evento para prender las luces..");
-    new CronJob(moment, function() {
-      serial.wrdo(config.settings.leds.rojo, 1);
-      serial.wrdo(config.settings.leds.verde, 1);
-    }, null, true, 'America/Argentina/Buenos_Aires');
+    if (job)
+        job.stop();
+    
+    if(time){
+        time = time.split(':');
+
+        job = new cron(time[1] + ' ' + time[0] +' * * *', () => {
+            app.serial.wrdo("6", 1);
+        }, undefined, true, "America/Argentina/Buenos_Aires");
+
+    }
   }
 }
 

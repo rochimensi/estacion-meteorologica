@@ -22,6 +22,9 @@ module.exports = app => {
   configsRouter.get("/led",    jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), (req, res) => {
     ConfigsCtrl.setLed(req, res, app);
   });
+  configsRouter.get("/led-time",    jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), (req, res) => {
+    ConfigsCtrl.setLedTime(req, res, app);
+  });
   configsRouter.get("/scan",    jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), (req, res) => {
     ConfigsCtrl.getScan(req, res, app);
   });

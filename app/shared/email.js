@@ -9,6 +9,9 @@ class EmailService {
       auth: {
         user: config.email.email,
         pass: config.email.password
+      },
+      tls: {
+          rejectUnauthorized: false
       }
     });
   }

@@ -31,12 +31,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="#">Dashboard<span class="sr-only">(current)</span></a>
                 </li>
-                <!--<li class="nav-item">
-                    <a class="nav-link" href="digitalSensor.html">Sensores Digitales</a>
-                </li>
-                <li class="nav-item" id="setup">
-                    <a class="nav-link" href="setup.html" onclick="setSetupPage()">Setup</a>
-                </li>-->
             </ul>
 
         </nav>
@@ -49,12 +43,21 @@
                     <tr >
                         <td  id="td1" >
                             <div id="chartTemp_div" style="width: 200px; height: 120px;"></div>
+                            <div id="temp_not_available" style="width: 200px; height: 120px;visibility:hidden;">
+                                <img src="./img/temp-no-available.png" width="200px" height="180px" />
+                            </div>
                         </td>
                         <td  id="td2" >
                             <div id="chartHum_div" style="width: 200px; height: 120px;"></div>
+                            <div id="hum_not_available" style="width: 200px; height: 120px;visibility:hidden;">
+                                <img src="./img/hum-no-available.png" width="200px" height="180px" />
+                            </div>
                         </td>
                         <td  id="td3" >
                             <div id="chartViento_div" style="width: 200px; height: 120px;"></div>
+                            <div id="viento_not_available" style="width: 200px; height: 120px;visibility:hidden;">
+                                <img src="./img/viento-no-available.png" width="200px" height="180px" />
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -71,7 +74,7 @@
                   <div class="col-6 col-sm-3 placeholder">
                     <span class="circle-active" id="stat-sum"></span>
                     <h4>Suministro Electrico</h4>
-                    <div class="text-muted" id="stat-sum-text">ABIERTO</div>
+                    <div class="text-muted" id="stat-sum-text">CERRADO</div>
                   </div>
                 </section>
               </div> 
@@ -144,7 +147,8 @@
             </div>
           </section>
           <br>
-          <h3>Barrido de Canales</h3> <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">SCAN</button>
+          <h3>Barrido de Canales</h3> 
+          <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;" id="id-scan">SCAN</button>
           <section class="row text-center grey" style="margin-top: 10px;">
             <br>
               <table align="rigth" width="200px">
@@ -161,7 +165,7 @@
               </table>  
           </section>
           <br>
-          <h3>Funcionamiento</h3><button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Verificar</button>
+          <h3>Funcionamiento</h3><button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;" id="id-func"<>Verificar</button>
            <section class="row text-center grey" style="margin-top: 10px;">
               <div style="margin: 20px;" id="func-status">  
                  
@@ -171,36 +175,54 @@
           <h3>Tiempo Muestra</h3>
           <section class="row text-center grey">
             <div style="margin: 20px;">  
-              <b>Segundos</b> <input type="text" id="muestras-seg" value="0" style="width: 70px;border:none" /> <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button>
+              <b>Segundos</b>
+               <input type="text" id="muestras-seg" value="0" style="width: 70px;border:none" id="muestras-seg"/> 
+               <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;" id="id-muestra">Guardar</button>
             </div>  
           </section>
           <br>
           <h3>Email Alarmas</h3>
           <section class="row text-center grey">
             <div style="margin: 20px;">  
-              <b>Correo Electronico</b> <input type="text" id="email-alarma" value="" style="width: 250px;border:none" /> <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button>
+              <b>Correo Electronico</b> <input type="text" id="email-alarm" style="width: 250px;border:none" /> 
+              <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;" id="email-butt">Guardar</button>
              </div>    
           </section>
           <br>
           <h3>Estado de Alarma</h3>
           <section class="row text-center grey">
              <div style="margin: 20px;">  
-              <b>Encendidas</b> <input type="checkbox" id="estado-alarma" value=""/> 
+              <b>Encendidas</b> <input type="checkbox" id="estado-alarma"/> 
              </div>  
           </section>
           <br>
           <h3>Horario de Encendido de Luces</h3>
           <section class="row text-center grey">
              <div style="margin: 20px;">  
-                    <input type="datetime-local" id="meeting-time"
+                    <input type="time" id="meeting-time"
                    name="meeting-time"
                    style="border:none">
-                   <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;">Guardar</button>
+                   <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;" id="luz-butt">Guardar</button>
+             </div> 
+          </section>
+          <br>
+          <h3>Luz Verde</h3>
+          <section class="row text-center grey">
+             <div style="margin: 20px;">  
+                   <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;" id="luz-verde-on">Encender</button>
+                   <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;" id="luz-verde-off">Apagar</button>
+             </div> 
+          </section>
+          <br>
+          <h3>Luz Roja</h3>
+          <section class="row text-center grey">
+             <div style="margin: 20px;">  
+                   <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;" id="luz-roja-on">Encender</button>
+                   <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;" id="luz-roja-off">Apagar</button>
              </div> 
           </section>
           <br>
           <br>
-
           </div>   
         </div>    
 

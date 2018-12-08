@@ -131,10 +131,10 @@ function initSocketIO() {
   iosocket.on('updateSuministro', recievedData => {
      if (recievedData){
        $("#stat-sum").attr('class', 'circle');
-       $("#stat-sum-text").text('CERRADO');
+       $("#stat-sum-text").text('ABIERTO');
     }else{
        $("#stat-sum").attr('class', 'circle-active');
-       $("#stat-sum-text").text('ABIERTO');
+       $("#stat-sum-text").text('CERRADO');
     }
   });
 
@@ -157,24 +157,172 @@ $(document).ready(function (){
 
        if (this.id == "temp-on"){
            if (this.checked){
-              $("#td1").css("visibility", "");
+              $("#chartTemp_div").css("visibility", "");
+              $("#temp_not_available").css("visibility", "hidden");
            }else{
-              $("#td1").css("visibility", "hidden");
+              $("#chartTemp_div").css("visibility", "hidden");
+              $("#temp_not_available").css("visibility", "");
            }
        }else if (this.id ==  "hum-on"){
           if (this.checked){
-               $("#td2").css("visibility", "");
+              $("#chartHum_div").css("visibility", "");
+              $("#hum_not_available").css("visibility", "hidden");
            }else{
-              $("#td2").css("visibility", "hidden");
+              $("#chartHum_div").css("visibility", "hidden");
+              $("#hum_not_available").css("visibility", "");
            }
        }else if (this.id ==  "viento-on"){
            if (this.checked){
-              $("#td3").css("visibility", "");
+              $("#chartViento_div").css("visibility", "");
+              $("#viento_not_available").css("visibility", "hidden");
            }else{
-              $("#td3").css("visibility", "hidden");
+              $("#chartViento_div").css("visibility", "hidden");
+              $("#viento_not_available").css("visibility", "");
            }
        }
      
   }); 
+
+//SCAN
+$("#id-scan").click(function(event) {
+  event.preventDefault(); 
+  $.ajax({ 
+     type:'GET', 
+     url :"http://localhost:4000/configs/scan", 
+     headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+     success: function(status) { 
+     console.log("Status " + status); 
+     } 
+    }); 
+ });
+
+//STATUS
+$("#id-func").click(function(event) {
+  event.preventDefault(); 
+  $.ajax({ 
+     type:'GET', 
+     url :"http://localhost:4000/configs/status", 
+     headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+     success: function(status) { 
+     console.log("Status " + status); 
+     } 
+    }); 
+ });
+
+ //TIEMPO MUESTRA
+ $("#id-muestra").click(function(event) {
+  var seconds = $("#muestras-seg").val();
+  event.preventDefault(); 
+  $.ajax({ 
+     type:'GET', 
+     url :"http://localhost:4000/configs/delay?delay="+seconds, 
+     headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+     success: function(status) { 
+     console.log("Status " + status); 
+     } 
+    }); 
+ });
+
+
+ //ENCENDIDO
+ $("#luz-butt").click(function(event) {
+  var time = $("#meeting-time").val();
+  event.preventDefault(); 
+  $.ajax({ 
+     type:'GET', 
+     url :"http://localhost:4000/configs/led-time?time="+time, 
+     headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+     success: function(status) { 
+     console.log("Status " + status); 
+     } 
+    }); 
+ });
+
+ //EMAIL ALARMAS
+ $("#email-butt").click(function(event) {
+  var email = $("#email-alarm").val();
+  event.preventDefault(); 
+  $.ajax({ 
+     type:'GET', 
+     url :"http://localhost:4000/configs/alerts-email?email="+email, 
+     headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+     success: function(status) { 
+     console.log("Status " + status); 
+     } 
+    }); 
+ });
+
+  //ESTADO ALARMA  /alerts
+ $("#estado-alarma").click(function(event) {
+    var valor = "false";
+    if( $(this).is(':checked') ){
+        valor = "true";
+        $(this).prop("checked",true);
+    } else {
+        valor = "false";
+        $(this).prop("checked",false);
+    }
+   
+    event.preventDefault(); 
+    $.ajax({ 
+       type:'GET', 
+       url :"http://localhost:4000/configs/alerts?valor="+valor,
+       headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+       success: function(status) { 
+       console.log("Status " + status); 
+       } 
+      }); 
+ });
+
+
+  //LUZ VERDE http://localhost:4000/configs/led?colorLed=verde&valor=1
+ $("#luz-verde-on").click(function(event) {
+  event.preventDefault(); 
+  $.ajax({ 
+     type:'GET', 
+     url :"http://localhost:4000/configs/led?colorLed=verde&valor=1", 
+     headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+     success: function(status) { 
+     console.log("Status " + status); 
+     } 
+    }); 
+ });
+
+  $("#luz-verde-off").click(function(event) {
+  event.preventDefault(); 
+  $.ajax({ 
+     type:'GET', 
+     url :"http://localhost:4000/configs/led?colorLed=verde&valor=0", 
+     headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+     success: function(status) { 
+     console.log("Status " + status); 
+     } 
+    }); 
+ });
+
+ $("#luz-roja-on").click(function(event) {
+  event.preventDefault(); 
+  $.ajax({ 
+     type:'GET', 
+     url :"http://localhost:4000/configs/led?colorLed=rojo&valor=1", 
+     headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+     success: function(status) { 
+     console.log("Status " + status); 
+     } 
+    }); 
+ });
+
+  $("#luz-roja-off").click(function(event) {
+  event.preventDefault(); 
+  $.ajax({ 
+     type:'GET', 
+     url :"http://localhost:4000/configs/led?colorLed=rojo&valor=0", 
+     headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+     success: function(status) { 
+     console.log("Status " + status); 
+     } 
+    }); 
+ });
+
 });
 

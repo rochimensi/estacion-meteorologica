@@ -1,4 +1,5 @@
 let config = require('../config');
+let schedule = require('../shared/schedule');
 
 class ConfigsController {
 
@@ -40,8 +41,6 @@ class ConfigsController {
   }
 
   setLedSchedule(req, res, app) {
-
-    //scheduleLedsOn(app.serial, )
     res.sendStatus(200);
   }
 
@@ -55,6 +54,12 @@ class ConfigsController {
     const ledPin = config.settings.leds[req.query.colorLed];
     const state = req.query.valor;
     app.serial.wrdo(ledPin, state);
+    res.sendStatus(200);
+  }
+
+   setLedTime(req, res, app) {
+    const time = req.query.time;
+    schedule.createCron(app, time);
     res.sendStatus(200);
   }
 
