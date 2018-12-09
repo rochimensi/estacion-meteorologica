@@ -219,4 +219,58 @@ void decodificar_comandos() {
     String valor = inputString.substring(5,indexClose);
     delaySegundos = valor.toInt();
   }
+
+  else if(inputString.substring(0,4)=="HUMA") { // HUMA(valor)
+    int indexClose = inputString.indexOf(")");
+    String valor = inputString.substring(5,indexClose);
+    humedadA = valor.toFloat();
+  }
+
+  else if(inputString.substring(0,4)=="HUMB") { // HUMB(valor)
+      int indexClose = inputString.indexOf(")");
+      String valor = inputString.substring(5,indexClose);
+      humedadB = valor.toFloat();
+    }
+
+  else if(inputString.substring(0,4)=="HUMC") { // HUMC(valor)
+      int indexClose = inputString.indexOf(")");
+      String valor = inputString.substring(5,indexClose);
+      humedadC = valor.toFloat();
+    }
+
+  else if(inputString.substring(0,4)=="TEMA") { // TEMA(valor)
+    int indexClose = inputString.indexOf(")");
+    String valor = inputString.substring(5,indexClose);
+    temperaturaA = valor.toFloat();
+  }
+
+  else if(inputString.substring(0,4)=="TEMB") { // TEMB(valor)
+    int indexClose = inputString.indexOf(")");
+    String valor = inputString.substring(5,indexClose);
+    temperaturaB = valor.toFloat();
+  }
+
+  else if(inputString.substring(0,4)=="TEMC") { // TEMC(valor)
+    int indexClose = inputString.indexOf(")");
+    String valor = inputString.substring(5,indexClose);
+    temperaturaC = valor.toFloat();
+  }
+
+  else if(inputString.substring(0,4)=="VIEA") { // VIEA(valor)
+      int indexClose = inputString.indexOf(")");
+      String valor = inputString.substring(5,indexClose);
+      vientoA = valor.toFloat();
+    }
+
+  else if(inputString.substring(0,4)=="VIEB") { // VIEB(valor)
+    int indexClose = inputString.indexOf(")");
+    String valor = inputString.substring(5,indexClose);
+    vientoB = valor.toFloat();
+  }
+
+  else if(inputString.substring(0,4)=="VIEC") { // VIEC(valor)
+    int indexClose = inputString.indexOf(")");
+    String valor = inputString.substring(5,indexClose);
+    vientoC = valor.toFloat();
+  }
 }

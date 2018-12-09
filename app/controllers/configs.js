@@ -40,6 +40,36 @@ class ConfigsController {
     res.sendStatus(200);
   }
 
+  setTempFuncion(req, res, app) {
+    const A = req.query.a;
+    const B = req.query.b;
+    const C = req.query.c;
+    app.serial.write(`TEMA(${A})`);
+    app.serial.write(`TEMB(${B})`);
+    app.serial.write(`TEMC(${C})`);
+    res.sendStatus(200);
+  }
+
+  setVientoFuncion(req, res, app) {
+    const A = req.query.a;
+    const B = req.query.b;
+    const C = req.query.c;
+    app.serial.write(`VIEA(${A})`);
+    app.serial.write(`VIEB(${B})`);
+    app.serial.write(`VIEC(${C})`);
+    res.sendStatus(200);
+  }
+
+  setHumedadFuncion(req, res, app) {
+    const A = req.query.a;
+    const B = req.query.b;
+    const C = req.query.c;
+    app.serial.write(`HUMA(${A})`);
+    app.serial.write(`HUMB(${B})`);
+    app.serial.write(`HUMC(${C})`);
+    res.sendStatus(200);
+  }
+
   setLedSchedule(req, res, app) {
     res.sendStatus(200);
   }

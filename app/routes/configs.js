@@ -15,7 +15,15 @@ module.exports = app => {
   configsRouter.get("/umbrales-temperatura",  jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), ConfigsCtrl.setTempUmbrales);
   configsRouter.get("/umbrales-viento",  jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), ConfigsCtrl.setVientoUmbrales);
   configsRouter.get("/umbrales-humedad",  jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), ConfigsCtrl.setHumedadUmbrales);
-
+  configsRouter.get("/transferencia-temperatura",   jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), (req, res) => {
+    ConfigsCtrl.setTempFuncion(req, res, app);
+  });
+  configsRouter.get("/transferencia-viento",   jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), (req, res) => {
+    ConfigsCtrl.setVientoFuncion(req, res, app);
+  });
+  configsRouter.get("/transferencia-humedad",   jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), (req, res) => {
+    ConfigsCtrl.setHumedadFuncion(req, res, app);
+  });
   configsRouter.get("/delay",   jwt({secret: config.jwt.secret, credentialsRequired: true}), role(true), (req, res) => {
     ConfigsCtrl.changeDelay(req, res, app);
   });
