@@ -397,8 +397,53 @@ $("#id-func").click(function(event) {
       }); 
    });
 
+   //TRANSFERENCIA TEMP /transferencia-temperatura
+   $("#temp-t-butt").click(function(event) {
+    var a = $("#temp-a").val();
+    var b = $("#temp-b").val();
+    var c = $("#temp-c").val();
+    event.preventDefault(); 
+    $.ajax({ 
+       type:'GET', 
+       url :"http://localhost:4000/configs/transferencia-temperatura?a="+ a +"&b="+ b +"&c="+ c, 
+       headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+       success: function(status) { 
+       console.log("Status " + status); 
+       } 
+      }); 
+   });
 
+   //TRANSFERENCIA HUM  /transferencia-humedad
+  $("#hum-t-butt").click(function(event) {
+    var a = $("#hum-a").val();
+    var b = $("#hum-b").val();
+    var c = $("#hum-c").val();
+    event.preventDefault(); 
+    $.ajax({ 
+       type:'GET', 
+       url :"http://localhost:4000/configs/transferencia-humedad?a="+ a +"&b="+ b +"&c="+ c, 
+       headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+       success: function(status) { 
+       console.log("Status " + status); 
+       } 
+      }); 
+   });
 
+   //TRANSFERENCIA VIENTO /transferencia-viento
+   $("#viento-t-butt").click(function(event) {
+    var a = $("#viento-a").val();
+    var b = $("#viento-b").val();
+    var c = $("#viento-c").val();
+    event.preventDefault(); 
+    $.ajax({ 
+       type:'GET', 
+       url :"http://localhost:4000/configs/transferencia-viento?a="+ a +"&b="+ b +"&c="+ c, 
+       headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+       success: function(status) { 
+       console.log("Status " + status); 
+       } 
+      }); 
+   });
 
 
 
