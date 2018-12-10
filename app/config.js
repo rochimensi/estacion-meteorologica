@@ -3,7 +3,7 @@ require('dotenv').config({ path: './.env' });
 const config = {
   alerts: {
     email: "nicolasgarcia520@gmail.com",
-    triggerEmails: false
+    triggerEmails: true
   },
 
 	email: {

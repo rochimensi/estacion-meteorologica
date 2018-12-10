@@ -192,7 +192,8 @@
           <h3>Estado de Alarma</h3>
           <section class="row text-center grey">
              <div style="margin: 20px;">  
-              <b>Encendidas</b> <input type="checkbox" id="estado-alarma"/> 
+             <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;" id="alarm-active">Activar</button>
+             <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;" id="alarm-inac">Inactivar</button>
              </div>  
           </section>
           <br>
@@ -223,6 +224,21 @@
           </section>
           <br>
           <br>
+          <div id="descarga-event">
+              <h3>Descarga evento</h3>
+              <section class="row text-center grey">
+                 Desde:<input type="datetime-local" id="date-from"/>
+                 Hasta:<input type="datetime-local" id="date-to"/>
+                 <div style="margin: 20px;">  
+                       <button class="btn btn-outline-success my-2 my-sm-0" style="margin: 10px;" id="descarga">Descargar</button>
+                 </div> 
+              </section>
+          </div>
+          <br>
+          <br>
+
+
+
           </div>   
         </div>    
 

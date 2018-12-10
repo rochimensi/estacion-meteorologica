@@ -278,26 +278,30 @@ $("#id-func").click(function(event) {
  });
 
   //ESTADO ALARMA  /alerts
- $("#estado-alarma").click(function(event) {
-    var valor = "false";
-    if( $(this).is(':checked') ){
-        valor = "true";
-        $(this).prop("checked",true);
-    } else {
-        valor = "false";
-        $(this).prop("checked",false);
-    }
-   
+ $("#alarm-active").click(function(event) {
     event.preventDefault(); 
     $.ajax({ 
        type:'GET', 
-       url :"http://localhost:4000/configs/alerts?valor="+valor,
+       url :"http://localhost:4000/configs/alerts?valor=true",
        headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
        success: function(status) { 
        console.log("Status " + status); 
        } 
       }); 
  });
+
+  $("#alarm-inac").click(function(event) {
+    event.preventDefault(); 
+    $.ajax({ 
+       type:'GET', 
+       url :"http://localhost:4000/configs/alerts?valor=false",
+       headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+       success: function(status) { 
+       console.log("Status " + status); 
+       } 
+      }); 
+ });
+
 
 
   //LUZ VERDE http://localhost:4000/configs/led?colorLed=verde&valor=1
@@ -444,6 +448,23 @@ $("#id-func").click(function(event) {
        } 
       }); 
    });
+
+
+    //TRANSFERENCIA VIENTO /transferencia-viento
+   $("#descarga").click(function(event) {
+    var from = $("#date-from").val();
+    var to = $("#date-to").val();
+    event.preventDefault(); 
+    $.ajax({ 
+       type:'GET', 
+       url :"http://localhost:4000/events/report?from="+ from +"&to="+ to, 
+       headers : { "Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NDQwNTg5Mzl9.Lh1aNIySDq63mcP2QaxNgHC4S35Ww9U7FcjhILAXDfU" }, 
+       success: function(status) { 
+       console.log("Status " + status); 
+       } 
+      }); 
+   });
+
 
 
 
